@@ -8,8 +8,7 @@ from tests.factories import ClientFactory, ParkingFactory
 
 def test_create_new_client_with_factory(client):
     with client.application.app_context():
-        initial_count = db.session.scalar(
-            select(func.count()).select_from(Client)) or 0
+        initial_count = db.session.scalar(select(func.count()).select_from(Client)) or 0
     client_data = factory.build(dict, FACTORY_CLASS=ClientFactory)
     response = client.post("/clients", json=client_data)
 
@@ -18,8 +17,7 @@ def test_create_new_client_with_factory(client):
     assert "id" in response.json or response.json.get("success") is True
 
     with client.application.app_context():
-        current_count = db.session.scalar(
-            select(func.count()).select_from(Client)) or 0
+        current_count = db.session.scalar(select(func.count()).select_from(Client)) or 0
         assert current_count == initial_count + 1
 
 

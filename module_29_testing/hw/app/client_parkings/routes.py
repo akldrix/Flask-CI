@@ -17,13 +17,11 @@ def create_client_parking():
     if not parking_id:
         return jsonify({"error": "Missing parking_id"}), 400
 
-    client = db.session.query(Client).where(
-        Client.id == client_id).one_or_none()
+    client = db.session.query(Client).where(Client.id == client_id).one_or_none()
     if client is None:
         return jsonify({"error": "Client not found"}), 404
 
-    parking = db.session.query(Parking).where(
-        Parking.id == parking_id).one_or_none()
+    parking = db.session.query(Parking).where(Parking.id == parking_id).one_or_none()
     if parking is None:
         return jsonify({"error": "Parking not found"}), 404
 
@@ -31,14 +29,12 @@ def create_client_parking():
         return jsonify({"error": "Parking not available"}), 400
 
     client_parking = ClientParking(
-        client_id=client_id, parking_id=parking_id, time_in=datetime.now(
-            timezone.utc)
+        client_id=client_id, parking_id=parking_id, time_in=datetime.now(timezone.utc)
     )
     db.session.add(client_parking)
     parking.count_available_places -= 1
     db.session.commit()
-    return jsonify(
-        {"success": True, "client-parking": client_parking.to_dict()}), 201
+    return jsonify({"success": True, "client-parking": client_parking.to_dict()}), 201
 
 
 @client_parkings_bp.route("/client_parkings", methods=["DELETE"])
@@ -50,13 +46,11 @@ def delete_client_parking():
     if not parking_id:
         return jsonify({"error": "Missing parking_id"}), 400
 
-    client = db.session.query(Client).where(
-        Client.id == client_id).one_or_none()
+    client = db.session.query(Client).where(Client.id == client_id).one_or_none()
     if client is None:
         return jsonify({"error": "Client not found"}), 404
 
-    parking = db.session.query(Parking).where(
-        Parking.id == parking_id).one_or_none()
+    parking = db.session.query(Parking).where(Parking.id == parking_id).one_or_none()
     if parking is None:
         return jsonify({"error": "Parking not found"}), 404
 
@@ -66,8 +60,7 @@ def delete_client_parking():
     client_parking = (
         db.session.query(ClientParking)
         .where(
-            ClientParking.client_id == client_id,
-            ClientParking.parking_id == parking_id
+            ClientParking.client_id == client_id, ClientParking.parking_id == parking_id
         )
         .one_or_none()
     )

@@ -11,8 +11,7 @@ class Parking(Base):
     address: Mapped[str] = mapped_column(String(50), nullable=False)
     opened: Mapped[bool] = mapped_column(Boolean)
     count_places: Mapped[int] = mapped_column(Integer, nullable=False)
-    count_available_places: Mapped[int] = mapped_column(
-        Integer, nullable=False)
+    count_available_places: Mapped[int] = mapped_column(Integer, nullable=False)
 
     def to_dict(self):
         return {

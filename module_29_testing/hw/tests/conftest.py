@@ -16,8 +16,7 @@ def app():
     if not database_exists(TEST_DB_URL):
         create_database(TEST_DB_URL)
     app = create_app(
-        config_override={"TESTING": True,
-                         "SQLALCHEMY_DATABASE_URI": TEST_DB_URL}
+        config_override={"TESTING": True, "SQLALCHEMY_DATABASE_URI": TEST_DB_URL}
     )
 
     with app.app_context():
@@ -49,8 +48,7 @@ def db(app):
         )
 
         test_parking = Parking(
-            address="Main St.", opened=True,
-            count_places=20, count_available_places=20
+            address="Main St.", opened=True, count_places=20, count_available_places=20
         )
 
         entry_time = datetime.now(timezone.utc)
