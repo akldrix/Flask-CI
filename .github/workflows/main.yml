@@ -24,7 +24,7 @@ jobs:
         run: black --check module_29_testing/hw
 
       - name: Run isort
-        run: isort --check-only --profile black module_29_testing/hw
+        run: isort --check-only --profile black --src module_29_testing/hw module_29_testing/hw
 
       - name: Run tests
         run: pytest module_29_testing/hw/tests
